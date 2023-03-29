@@ -12,7 +12,7 @@ export class GameService {
         private http: HttpClient
     ) { }
 
-    getGames(title?: String, categoryId?: number): Observable<Game[]> {            
+    getGames(title?: String, categoryId?: number): Observable<Game[]> {  
         return this.http.get<Game[]>(this.composeFindUrl(title, categoryId));
     }
 

@@ -8,13 +8,15 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { DialogConfirmationComponent } from './dialog-confirmation/dialog-confirmation.component';
+import { DialogErrorComponent } from './dialog-error/dialog-error.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    DialogConfirmationComponent
+    DialogConfirmationComponent,
+    DialogErrorComponent
   ],
   imports: [
     CommonModule,
