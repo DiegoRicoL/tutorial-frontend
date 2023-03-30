@@ -69,11 +69,15 @@ export class LoanCreateComponent implements OnInit{
     onSave() {
       //Loan cannot end before it begins
       if(this.loan.begin > this.loan.end){
-        alert("Return date cannot be before the loan date");
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          data: { message: "Return date cannot be before the loan date" }
+        });
       } 
       //Loan cannot be longer than 14 days
       else if((this.loan.end.getTime() - this.loan.begin.getTime()) / (1000 * 3600 * 24) > 14) {
-        alert("Loan cannot be longer than 14 days");
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          data: { message: "Loan cannot be longer than 14 days" }
+        });
       } 
       else { //If everything is ok, save the loan
         this.loanService.saveLoan(this.loan).subscribe(

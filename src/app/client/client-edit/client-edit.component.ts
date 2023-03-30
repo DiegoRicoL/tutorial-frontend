@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogErrorComponent } from 'src/app/core/dialog-error/dialog-error.component';
 import { ClientService } from '../client.service';
 import { Client } from '../model/Client';
 
@@ -15,7 +16,8 @@ export class ClientEditComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ClientEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,9 @@ export class ClientEditComponent implements OnInit {
   onSave() {
     this.clientService.existsClient(this.client.name).subscribe(result => {
       if(result){
-        alert('Client already exists');
+        const dialogRef = this.dialog.open(DialogErrorComponent, {
+          data: { message: 'Client already exists' }
+        });
 
       } else {
         this.clientService.saveClient(this.client).subscribe(result => {
